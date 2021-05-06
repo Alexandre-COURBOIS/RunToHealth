@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'tabs/register',
     pathMatch: 'full'
   },
   {
@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'profil-user',
     loadChildren: () => import('./Pages/profil-user/profil-user.module').then( m => m.ProfilUserPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   },
 ];
 
