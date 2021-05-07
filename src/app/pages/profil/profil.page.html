@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Votre profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button color="danger"><ion-icon name="arrow-back-outline"></ion-icon> Retour</ion-button>
+
+  <ion-thumbnail>
+    <ion-img [src]="img"></ion-img>
+  </ion-thumbnail>
+
+  <p class="ion-text-center">Nom de l'utlisateur</p>
+
+  <ion-row class="ion-text-center">
+    <ion-col>
+      <ion-icon name="accessibility-outline"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <ion-icon name="barbell-outline"></ion-icon>
+    </ion-col>
+    <ion-col>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-text-center">
+    <ion-col>180 cm</ion-col>
+    <ion-col>75 Kg</ion-col>
+    <ion-col>test 3</ion-col>
+  </ion-row>
+
+
+  <ion-item class="list" routerLink="/infos" routerDirection="forward">
+    <ion-label>Informations Personnelles
+      <ion-icon name="arrow-forward-outline" item-right></ion-icon>
+    </ion-label>
+  </ion-item>
+
+  <ion-item routerLink="/login" routerDirection="forward">
+    <ion-label>Mes Objectifs
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-label>
+  </ion-item>
+
+  <ion-item routerLink="/login" routerDirection="forward">
+    <ion-label>Mes Statistiques
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-label>
+  </ion-item>
+
+  <ion-item routerLink="/login" routerDirection="forward">
+    <ion-label>Ma Progression
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-label>
+  </ion-item>
+
+</ion-content>

@@ -51,6 +51,25 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./pages/profil/profil.module').then( m => m.ProfilPageModule)
+  },  {
+    path: 'infos',
+    loadChildren: () => import('./pages/infos/infos.module').then( m => m.InfosPageModule)
+  },
+  {
+    path: 'objectifs',
+    loadChildren: () => import('./pages/objectifs/objectifs.module').then( m => m.ObjectifsPageModule)
+  },
+  {
+    path: 'stats',
+    loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
+  },
+  {
+    path: 'progression',
+    loadChildren: () => import('./pages/progression/progression.module').then( m => m.ProgressionPageModule)
   }
 
 ];
