@@ -1,12 +1,8 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Votre profil</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-button color="danger"><ion-icon name="arrow-back-outline"></ion-icon> Retour</ion-button>
 
   <ion-thumbnail>
     <ion-img [src]="img"></ion-img>
@@ -32,29 +28,35 @@
     <ion-col>test 3</ion-col>
   </ion-row>
 
-
-  <ion-item class="list" routerLink="/infos" routerDirection="forward">
-    <ion-label>Informations Personnelles
+</ion-content>
+<ion-footer>
+  <ion-item lines="none" color="transparent" class="list" routerLink="/infos" routerDirection="forward">
+    <ion-icon class="icon-footer" name="information-circle"></ion-icon>
+    <ion-label >Informations Personnelles
       <ion-icon name="arrow-forward-outline" item-right></ion-icon>
     </ion-label>
   </ion-item>
 
-  <ion-item routerLink="/objectifs" routerDirection="forward">
+  <ion-item lines="none" color="transparent" class="list" routerLink="/objectifs" routerDirection="forward">
+    <ion-icon class="icon-footer" name="list"></ion-icon>
     <ion-label>Mes Objectifs
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-label>
   </ion-item>
 
-  <ion-item routerLink="/stats" routerDirection="forward">
-    <ion-label>Mes Statistiques
+  <ion-item lines="none" color="transparent" class="list" routerLink="/stats" routerDirection="forward">
+    <ion-icon  class="icon-footer" name="podium"></ion-icon>
+    <ion-label>
+      Mes Statistiques
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-label>
   </ion-item>
 
-  <ion-item routerLink="/progression" routerDirection="forward">
+  <ion-item lines="none"  color="transparent" class="list" routerLink="/progression" routerDirection="forward">
+    <ion-icon class="icon-footer" name="trending-up"></ion-icon>
     <ion-label>Ma Progression
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-label>
   </ion-item>
 
-</ion-content>
+</ion-footer>
