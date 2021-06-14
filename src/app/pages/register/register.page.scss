@@ -1,0 +1,47 @@
+ion-title {
+  text-align: center;
+}
+
+ion-item {
+  background-color: black !important;
+}
+
+.sectionName {
+  margin-left: 10%;
+  font-weight: lighter !important;
+}
+
+.rowWidth {
+  width: 100%;
+}
+
+.emailContainer {
+  width: 100%;
+  .emailItem {
+    width: 100%;
+  }
+}
+
+.profilSetup {
+  color: green;
+
+  ion-icon {
+    color: darkgreen;
+  }
+
+  ion-icon:hover {
+    color: white;
+  }
+}
+
+.contentTwoBg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.containerPartTwo {
+  margin-top: 10%;
+}

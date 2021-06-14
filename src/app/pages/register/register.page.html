@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nous rejoindre <ion-icon name="planet-outline"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="formPartOne == false">
+
+  <form [formGroup]="registerForm">
+
+    <ion-row>
+      <p class="sectionName">Qui êtes vous ?</p>
+    </ion-row>
+
+    <ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre nom" name="name" formControlName="name"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre prenom" name="surname" formControlName="surname"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="rowWidth">
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre pseudo" name="pseudo" formControlName="pseudo"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select placeholder="Votre genre" name="gender" formControlName="gender">
+              <ion-select-option value="man">Homme</ion-select-option>
+              <ion-select-option value="women">Femme</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="emailContainer">
+        <ion-item class="emailItem">
+          <ion-input placeholder="Votre email" name="email" formControlName="email"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-row>
+
+    <ion-row>
+      <p class="sectionName">D'où venez vous ?</p>
+    </ion-row>
+
+    <ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre ville" name="city" formControlName="city"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre adresse" name="address" formControlName="address"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre code postal" name="postalCode" formControlName="postalCode"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="N° de téléphone" name="phone" formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </form>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-button  (click)="submitFirstPart()" color="success">
+      Dites-nous en plus !
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-row>
+
+</ion-content>
+
+<ion-content class="contentTwoBg" *ngIf="formPartOne">
+
+  <ion-button
+    color="danger" class="buttonReturn" (click)="setFormPart()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+    Retour
+  </ion-button>
+
+  <ion-row class="containerPartTwo">
+
+    <ion-row style="width: 100%" class="ion-justify-content-center">
+      <p>Votre corpulence </p>
+    </ion-row>
+    <form [formGroup]="registerFormSecondPart" (ngSubmit)="submitSecondPart()">
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Votre poids en kilogramme" name="weight" formControlName="weight"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="Votre taille en centimètre" name="height" formControlName="height"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-row>
+        <ion-row style="width: 100%" class="ion-justify-content-center">
+          <p>Etes vous consommateur de : </p>
+        </ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Cigarettes</ion-label>
+            <ion-toggle slot="start" name="smoker" formControlName="smoker" color="success"></ion-toggle>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Alcool</ion-label>
+            <ion-toggle slot="start" name="alcohol" formControlName="alcohol" color="success"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row style="width: 100%" class="ion-justify-content-center">
+          <p>Et pour finir : votre mot de passe <ion-icon name="key-outline"></ion-icon></p>
+        </ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Votre mot de passe" type="password" name="password" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input placeholder="Confirmer mot de passe" type="password" name="verifPassword" formControlName="verifPassword"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-button type="submit">Envoyer</ion-button>
+    </form>
+  </ion-row>
+
+
+</ion-content>
