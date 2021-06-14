@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastService} from "../../services/toast.service";
 import {RegisterService} from "../../services/register.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterPage implements OnInit {
   private formPartOne = false;
 
 
-  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService) { }
+  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService, private router: Router) { }
 
   ngOnInit() {
     this.initRegisterForms();
@@ -93,7 +94,12 @@ export class RegisterPage implements OnInit {
         this.registerService.createUser(this.userInformations[0].name,this.userInformations[0].surname,this.userInformations[0].pseudo,this.userInformations[0].gender,
           this.userInformations[0].email,this.userInformations[0].city,this.userInformations[0].address,this.userInformations[0].postalCode,this.userInformations[0].phone,
           weight, height, smoker, alcohol, password).subscribe(value => {
-            console.log(value);
+
+            if (value) {
+            this.toastService.successToast('Votre compte a été créer avec succès. Vous pouvez vous connecter');
+            this.router.navigate(['/login']);
+            }
+
           }
         )
       } else {
