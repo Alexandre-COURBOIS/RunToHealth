@@ -23,7 +23,7 @@ export class StatsPage {
           text: 'Nombre de pas'
         },
         xAxis: {
-          categories: ['Jour', 'Semaine', 'Mois']
+          categories: ['Heure','Jour', 'Semaine', 'Mois']
         },
         yAxis: {
           title: {
@@ -34,7 +34,7 @@ export class StatsPage {
           {
             name: 'Jane',
             type: undefined,
-            data: [10000, 50000, 980000]
+            data: [9000, 10000, 50000, 980000]
           }]
       });
     }
