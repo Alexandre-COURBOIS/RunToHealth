@@ -36,28 +36,28 @@ constructor() { }
             data: [9000, 10000, 15000, 20000,8000,11000,11500]
           }]
       });
-      let myChart2 = HighCharts.chart('highcharts2',{
-           chart: {
-                     type: 'spline'
-                   },
-                   title: {
-                     text: 'Nombre de pas par semaine sur un mois'
-                   },
-                   xAxis: {
-                     categories: ['S1','S2', 'S3', 'S4']
-                   },
-                   yAxis: {
-                     title: {
-                       text: 'Pas effectué'
-                     }
-                   },
-                   series: [
-                     {
-                       name: 'Jane',
-                       type: undefined,
-                       data: [12 071, 15 000, 30 000, 25 000]
-                     }]
-          });
+     let myChart2 = HighCharts.chart('highcharts2',{
+                chart: {
+                          type: 'spline'
+                        },
+                        title: {
+                          text: 'Nombre de pas par semaine sur un mois'
+                        },
+                        xAxis: {
+                          categories: ['S1','S2', 'S3', 'S4']
+                        },
+                        yAxis: {
+                          title: {
+                            text: 'Pas effectué'
+                          }
+                        },
+                        series: [
+                          {
+                            name: 'Jane',
+                            type: undefined,
+                            data: [12071, 15000, 30000, 25000]
+                          }]
+               });
 
     }
 
