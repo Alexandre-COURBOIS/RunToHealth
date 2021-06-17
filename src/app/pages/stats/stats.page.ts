@@ -15,7 +15,7 @@ export class StatsPage {
     }
 
     plotDynamicSplineChart() {
-        let myChart = HighCharts.chart('highcharts', {
+        let myChart = HighCharts.chart('livecharts', {
           chart: {
             type: 'spline',
             animation: true, // don't animate in old IE
