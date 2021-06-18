@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>addObjectif</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form (ngSubmit)="addObjectif()">
+    <ion-item *ngIf="type" >
+      <ion-label>Objectifs</ion-label>
+      <ion-select (ionChange)="getObjectivesType($event);" >
+          <ion-select-option  *ngFor="let objectives of type" value="{{ objectives }}">{{ objectives }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row *ngIf="type_selected =='Cigarette'">
+      <ion-col>
+      <p>Nombre de cigarette par jour:</p>
+      </ion-col>
+      <ion-col>
+      <ion-range min="0" max="20" pin="true" snaps="true" color="secondary">
+        <ion-label slot="start">0</ion-label>
+        <ion-label slot="end">20</ion-label>
+      </ion-range>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-item *ngIf="type_selected =='Alcool'">
+
+    </ion-item>
+
+    <ion-row *ngIf="type_selected =='Poids'">
+      <ion-col>
+      <ion-text>Objectif en gramme par jour:</ion-text>
+      </ion-col>
+      <ion-col>
+      <ion-input type="number" name="poids"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="type_selected =='Sport'">
+      <ion-col>
+      <ion-text>Nombre d'heure de sport par jour:</ion-text>
+      </ion-col>
+      <ion-col>
+      <ion-datetime displayFormat="HH:mm:ss" placeholder="Select Date"></ion-datetime>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label>Début de l'objectif:</ion-label>
+      <ion-datetime displayFormat="DD MM YY" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>fin de l'objectif</ion-label>
+      <ion-datetime displayFormat="DD MM YY" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+
+    <ion-button type="submit" >Créer l'objectif</ion-button>
+  </form>
+
+
+</ion-content>
