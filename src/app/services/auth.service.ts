@@ -11,7 +11,11 @@ const helper = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+
+  token: string;
+
   constructor(private httpClient : HttpClient, private storage: Storage) { }
 
   public async getToken(): Promise<string> {
@@ -20,7 +24,7 @@ export class AuthService {
 
   public async isAuthenticated(): Promise<boolean> {
     const token = this.storage.get('_token');
-    return helper.isTokenExpired('token', await token);
+    return helper.isTokenExpired(await token);
   }
 
   login(email: string, password: string) {
