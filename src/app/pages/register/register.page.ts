@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastService} from "../../services/toast.service";
 import {RegisterService} from "../../services/register.service";
 import {Router} from "@angular/router";
+import {Storage} from "@ionic/storage-angular";
 
 @Component({
   selector: 'app-register',
@@ -17,10 +18,11 @@ export class RegisterPage implements OnInit {
   private formPartOne = false;
 
 
-  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService, private router: Router, private storage: Storage) { }
 
   ngOnInit() {
     this.initRegisterForms();
+    this.storage.create();
   }
 
   initRegisterForms() {
@@ -47,7 +49,6 @@ export class RegisterPage implements OnInit {
   }
 
   submitFirstPart() {
-
     if (this.registerForm.valid) {
 
       this.userInformations[0] = {
@@ -114,7 +115,7 @@ export class RegisterPage implements OnInit {
     if (this.formPartOne === true) {
       this.formPartOne = false;
     } else if (this.formPartOne === false) {
-      this.formPartOne = true
+      this.formPartOne = true;
     }
   }
 

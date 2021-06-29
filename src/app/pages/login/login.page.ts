@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Storage} from "@ionic/storage-angular";
+import {ToastService} from "../../services/toast.service";
+import {AuthService} from "../../services/auth.service";
+import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
+import {UserService} from "../../services/user.service";
+import {HttpHeaders} from "@angular/common/http";
+import {JwtInterceptor} from "../../Helpers/jwt.interceptor";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +16,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  submitted = false;
+  loginForm: FormGroup;
+  token: string;
+
+  constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,
+              private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.buildForm();
@@ -17,9 +30,63 @@ export class LoginPage implements OnInit {
 
   buildForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!.:,;^%*?&µù%=&])[A-Za-z\d$@$!.:,;^%*?&µù%=&].{8,}')]]
     })
+  }
+
+  onSubmit() {
+
+    this.submitted = true;
+
+    if (this.loginForm.valid) {
+
+      const typedEmail = this.loginForm.get('email')?.value;
+      const typedPassword = this.loginForm.get('password')?.value;
+
+      if (typedEmail && typedPassword) {
+
+        this.storage.create();
+
+        this.authService.login(typedEmail, typedPassword).subscribe(value => {
+
+          // @ts-ignore
+          if (value.token && value.refresh_token) {
+
+            // @ts-ignore
+            const JWTToken = value.token;
+            // @ts-ignore
+            this.token = value.token;
+
+            this.storage.set('_token',JWTToken);
+
+            const decodedJWT = jwtDecode(JWTToken);
+
+            this.userService.getUsersByEmail(decodedJWT['username'], JWTToken).subscribe(value => {
+
+              this.storage.set("user",value);
+
+              // @ts-ignore
+              if (value.active === true) {
+
+                this.router.navigate(['tabs/home']);
+                // @ts-ignore
+                this.toastr.successToast("Bienvenue " + value.surname)
+
+              } else {
+                this.toastr.customErrortoast("Veuillez valider votre inscription en cliquant sur le lien qui vous a été envoyé par mail lors de votre inscription." ,5000);
+              }
+            });
+          }
+        });
+      }
+    }
+
+
+  }
+
+  get f() {
+    return this.loginForm.controls;
   }
 
 }
