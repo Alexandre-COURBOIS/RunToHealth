@@ -10,8 +10,14 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getUsersByEmail(email: string, headers) {
+  getUsersByEmail(email: string, token: string) {
 
-    return this.httpClient.post(environment.API_URL + 'api/get/user', {email : email}, headers);
+    const httpHeaders = {
+      headers: new HttpHeaders()
+        .append('Authorization', `Bearer ${token}`)
+    };
+
+    return this.httpClient.post(environment.API_URL + 'api/get/user', {email : email}, httpHeaders);
   }
+
 }

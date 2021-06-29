@@ -15,21 +15,25 @@ import {AlertController} from "@ionic/angular";
 export class JwtInterceptor implements HttpInterceptor {
 
   token : string;
+  tokenLogin : string;
+  tableValue: Object;
 
   constructor(private authService : AuthService, private storage: Storage, private alertController: AlertController) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    this.authService.getToken().then(token => {
-      this.token = token;
-    });
+      this.authService.getToken().then(token => {
+        if (token) {
+          this.token = token;
+        }
+      });
 
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.token}`
-      }
-    });
-
-    return next.handle(request);
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.token}`
+        }
+      });
+      return next.handle(request);
   }
+
 }

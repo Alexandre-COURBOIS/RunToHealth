@@ -6,8 +6,9 @@ import {AuthService} from "../../services/auth.service";
 import jwt_decode from "jwt-decode";
 import jwtDecode from "jwt-decode";
 import {UserService} from "../../services/user.service";
-import {HttpHeadersService} from "../../services/http-headers.service";
 import {HttpHeaders} from "@angular/common/http";
+import {JwtInterceptor} from "../../Helpers/jwt.interceptor";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginPage implements OnInit {
   token: string;
 
   constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,
-              private userService: UserService,private httpHeaders : HttpHeadersService) { }
+              private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.buildForm();
@@ -50,7 +51,7 @@ export class LoginPage implements OnInit {
         this.authService.login(typedEmail, typedPassword).subscribe(value => {
 
           // @ts-ignore
-          if (value.token && value.refresh_token) {0
+          if (value.token && value.refresh_token) {
 
             // @ts-ignore
             const JWTToken = value.token;
@@ -61,18 +62,22 @@ export class LoginPage implements OnInit {
 
             const decodedJWT = jwtDecode(JWTToken);
 
-            const httpHeaders = {
-              headers: new HttpHeaders()
-                .append('Authorization', `Bearer ${JWTToken}`)
-            };
+            this.userService.getUsersByEmail(decodedJWT['username'], JWTToken).subscribe(value => {
 
-            this.userService.getUsersByEmail(decodedJWT['username'], httpHeaders).subscribe(value => {
+              this.storage.set("user",value);
+
               // @ts-ignore
-              console.log(value);
+              if (value.active === true) {
+
+                this.router.navigate(['tabs/home']);
+                // @ts-ignore
+                this.toastr.successToast("Bienvenue " + value.surname)
+
+              } else {
+                this.toastr.customErrortoast("Veuillez valider votre inscription en cliquant sur le lien qui vous a été envoyé par mail lors de votre inscription." ,5000);
+              }
             });
-
           }
-
         });
       }
     }

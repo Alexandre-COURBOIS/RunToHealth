@@ -17,14 +17,10 @@ import {JwtInterceptor} from "./Helpers/jwt.interceptor";
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    },
-    {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
-    }
+    },
+    JwtInterceptor,
   ],
   bootstrap: [AppComponent],
 })
