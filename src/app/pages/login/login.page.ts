@@ -6,6 +6,8 @@ import {AuthService} from "../../services/auth.service";
 import jwt_decode from "jwt-decode";
 import jwtDecode from "jwt-decode";
 import {UserService} from "../../services/user.service";
+import {HttpHeadersService} from "../../services/http-headers.service";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -16,8 +18,10 @@ export class LoginPage implements OnInit {
 
   submitted = false;
   loginForm: FormGroup;
+  token: string;
 
-  constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,
+              private userService: UserService,private httpHeaders : HttpHeadersService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -50,12 +54,19 @@ export class LoginPage implements OnInit {
 
             // @ts-ignore
             const JWTToken = value.token;
+            // @ts-ignore
+            this.token = value.token;
 
             this.storage.set('_token',JWTToken);
 
             const decodedJWT = jwtDecode(JWTToken);
 
-            this.userService.getUsersByEmail(decodedJWT['username']).subscribe(value => {
+            const httpHeaders = {
+              headers: new HttpHeaders()
+                .append('Authorization', `Bearer ${this.token}`)
+            };
+
+            this.userService.getUsersByEmail(decodedJWT['username'], httpHeaders).subscribe(value => {
               // @ts-ignore
               console.log(value);
             });

@@ -10,8 +10,8 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getUsersByEmail(email: string) {
+  getUsersByEmail(email: string, headers) {
 
-    return this.httpClient.post(environment.API_URL + 'api/user/get/user', {email : email});
+    return this.httpClient.post(environment.API_URL + 'api/get/user', {email : email}, headers);
   }
 }
