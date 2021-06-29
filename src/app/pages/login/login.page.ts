@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
         this.authService.login(typedEmail, typedPassword).subscribe(value => {
 
           // @ts-ignore
-          if (value.token && value.refresh_token) {
+          if (value.token && value.refresh_token) {0
 
             // @ts-ignore
             const JWTToken = value.token;
@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
 
             const httpHeaders = {
               headers: new HttpHeaders()
-                .append('Authorization', `Bearer ${this.token}`)
+                .append('Authorization', `Bearer ${JWTToken}`)
             };
 
             this.userService.getUsersByEmail(decodedJWT['username'], httpHeaders).subscribe(value => {

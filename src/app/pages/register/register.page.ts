@@ -47,7 +47,6 @@ export class RegisterPage implements OnInit {
   }
 
   submitFirstPart() {
-
     if (this.registerForm.valid) {
 
       this.userInformations[0] = {
@@ -114,7 +113,7 @@ export class RegisterPage implements OnInit {
     if (this.formPartOne === true) {
       this.formPartOne = false;
     } else if (this.formPartOne === false) {
-      this.formPartOne = true
+      this.formPartOne = true;
     }
   }
 
