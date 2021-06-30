@@ -24,6 +24,18 @@ const routes: Routes = [
         path: 'active-account/:token',
         loadChildren: () => import('../activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
       },
+      {
+        path: 'forgot-password',
+        loadChildren: () => import('../forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+      },
+      {
+        path: 'reset-password/:token',
+        loadChildren: () => import('../reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+      },
+      {
+        path: '404NotFound',
+        loadChildren: () => import('../not-found404/not-found404.module').then( m => m.NotFound404PageModule)
+      },
     ]
   }
 ];

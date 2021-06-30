@@ -10,6 +10,7 @@ import {HttpHeaders} from "@angular/common/http";
 import {JwtInterceptor} from "../../Helpers/jwt.interceptor";
 import {Router} from "@angular/router";
 import {ActivationService} from "../../services/activation.service";
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginPage implements OnInit {
   submitted = false;
   loginForm: FormGroup;
   token: string;
+  modalDataResponse: any;
 
   constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,
               private userService: UserService, private router: Router, private activationService: ActivationService) { }
@@ -86,12 +88,9 @@ export class LoginPage implements OnInit {
         });
       }
     }
-
-
   }
 
   get f() {
     return this.loginForm.controls;
   }
-
 }
