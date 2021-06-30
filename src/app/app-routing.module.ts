@@ -27,6 +27,26 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   },
+  {
+    path: 'active-account/:token',
+    loadChildren: () => import('./Pages/activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./Pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'reset-password/:token',
+    loadChildren: () => import('./Pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: '404NotFound',
+    loadChildren: () => import('./Pages/not-found404/not-found404.module').then( m => m.NotFound404PageModule)
+  },
+
+
+
+
 ];
 
 @NgModule({
