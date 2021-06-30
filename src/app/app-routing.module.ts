@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   },
+  {
+    path: 'active-account/:token',
+    loadChildren: () => import('./Pages/activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
+  },
+
 ];
 
 @NgModule({

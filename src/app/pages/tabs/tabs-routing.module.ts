@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
       },
+      {
+        path: 'active-account/:token',
+        loadChildren: () => import('../activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
+      },
     ]
   }
 ];
