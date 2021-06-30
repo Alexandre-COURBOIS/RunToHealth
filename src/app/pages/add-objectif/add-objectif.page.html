@@ -26,6 +26,7 @@
 
     <ion-item *ngIf="type_selected =='Alcool'">
       <p>Vous ne devez pas consommer d'alcool pendant la période que vous indiquerez ci-dessous</p>
+      <ion-input formControlName="alcool" type="hidden" value="false"></ion-input>
     </ion-item>
 
     <ion-row *ngIf="type_selected =='Poids'">

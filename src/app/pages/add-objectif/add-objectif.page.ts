@@ -34,6 +34,7 @@ export class AddObjectifPage implements OnInit {
       objectif:['', [Validators.required]],
       numberCigarette:['', []],
       numberPoids:['', []],
+      alcool:['', []],
       timeSport:['', []],
       begin:['', [Validators.required]],
       end:['', [Validators.required]],
