@@ -43,8 +43,22 @@ const routes: Routes = [
     path: '404NotFound',
     loadChildren: () => import('./Pages/not-found404/not-found404.module').then( m => m.NotFound404PageModule)
   },
-
-
+  {
+    path: 'add-objectif',
+    loadChildren: () => import('./Pages/add-objectif/add-objectif.module').then( m => m.AddObjectifPageModule)
+  },
+  {
+    path: 'objectifs',
+    loadChildren: () => import('./Pages/objectifs/objectifs.module').then( m => m.ObjectifsPageModule)
+  },
+  {
+    path: 'update-objectif/:id',
+    loadChildren: () => import('./Pages/update-objectif/update-objectif.module').then( m => m.UpdateObjectifPageModule)
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./Pages/profil/profil.module').then( m => m.ProfilPageModule)
+  },
 
 
 ];

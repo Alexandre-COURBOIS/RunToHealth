@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
 import {Storage} from "@ionic/storage-angular";
-import { Router } from '@angular/router';
+import {CanActivate, Router} from "@angular/router";
+import {Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService {
+export class LoggedGuardService {
 
   constructor(private storage: Storage, private router: Router) { }
 
@@ -20,17 +19,21 @@ export class AuthGuardService {
 
         this.storage.get('is_logged').then(logged => {
           if (logged === true) {
-            this.storage.get("user").then(user => {
-              this.storage.get('_token').then(token => {
+            this.storage.get('_token').then(token => {
+              this.storage.get('user').then(user => {
                 // @ts-ignore
                 if (jwtDecode(token).username === user.email) {
-                  this.router.navigate(['tabs/profil']);
+                  resolve(true);
+                } else {
+                  this.router.navigate(['/tabs/login']);
                   resolve(false);
                 }
               });
             });
+          } else {
+            this.router.navigate(['/tabs/login']);
+            resolve(false);
           }
-          resolve(true);
         });
       }
     );

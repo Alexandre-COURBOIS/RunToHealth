@@ -1,5 +1,9 @@
 <ion-content>
 
+  <ion-row class="ion-text-right">
+  <ion-back-button mode="ios" text="RETOUR" defaultHref="/tabs/profil"></ion-back-button>
+  </ion-row>
+
   <ion-row>
     <ion-col>
       <ion-back-button mode="ios" text="retour"></ion-back-button>
@@ -14,9 +18,9 @@
     <h4>Mettre à jour vos informations personnel : </h4>
     <ion-col>
       <ion-text>
-        <p>Prenom : <strong>{{surname}}</strong></p>
-        <p>Nom : <strong>{{name}}</strong></p>
-        <p>Pseudo : <strong>{{pseudo}}</strong></p>
+        <p class="ion-text-left">Prenom : <strong>{{surname}}</strong></p>
+        <p class="ion-text-left">Nom : <strong>{{name}}</strong></p>
+        <p class="ion-text-left">Pseudo : <strong>{{pseudo}}</strong></p>
       </ion-text>
     </ion-col>
     <ion-col class="ion-align-self-center">
@@ -28,11 +32,11 @@
     <h4>Vous souhaitez mettre à jour vos coordonnées :</h4>
     <ion-col>
       <ion-text>
-        <p>Ville : <strong>{{city}}</strong></p>
-        <p *ngIf="address">Adresse : <strong>{{address}}</strong></p>
-        <p *ngIf="!address">Adresse : <strong>Ajoutez votre adresse !</strong></p>
-        <p *ngIf="postalCode">Code postal : <strong>{{postalCode}}</strong></p>
-        <p *ngIf="!postalCode">Code postal : <strong>Ajoutez votre code postal !</strong></p>
+        <p class="ion-text-left">Ville : <strong>{{city}}</strong></p>
+        <p class="ion-text-left" *ngIf="address">Adresse : <strong>{{address}}</strong></p>
+        <p class="ion-text-left" *ngIf="!address">Adresse : <strong>Ajoutez votre adresse !</strong></p>
+        <p class="ion-text-left" *ngIf="postalCode">Code postal : <strong>{{postalCode}}</strong></p>
+        <p class="ion-text-left" *ngIf="!postalCode">Code postal : <strong>Ajoutez votre code postal !</strong></p>
       </ion-text>
     </ion-col>
     <ion-col class="ion-align-self-center">
@@ -41,7 +45,7 @@
   </ion-row>
 
   <ion-row class="ion-justify-content-center ion-text-center">
-    <h4>Mettre à jour votre mot de passe : </h4>
+    <h4>Vous souhaitez mettre à jour votre mot de passe : </h4>
     <ion-button routerLink="update-user-password">Modifier</ion-button>
   </ion-row>
 
