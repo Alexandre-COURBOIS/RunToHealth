@@ -67,12 +67,15 @@ export class UpdateObjectifPage implements OnInit {
 
     if (this.value == 0) {
       console.log("Suppresion...");
-      this.deleteObjective(this.id);
+      this.objectifService.deleteObjective(this.id,this.token).subscribe(value=>{console.log(value)});
+      setTimeout(() => {
+        this.loaderService.hideLoader();
+        this.router.navigate(['/tabs/objectifs']);
+      },1000);
 
     } else if (this.value == 1) {
       this.objectifService.setObjectifSuccess(this.id,this.token).subscribe(value => {
         this.toastService.successToast(value);
-
         setTimeout(() => {
           this.loaderService.hideLoader();
           this.router.navigate(['/tabs/objectifs']);
@@ -84,19 +87,6 @@ export class UpdateObjectifPage implements OnInit {
       console.log("Modification...");
     }
 
-  }
-
-  deleteObjective(id){
-
-    let url="http://127.0.0.1:8000/suppression";
-    let header= new HttpHeaders({"Content-type":"application-json"}); //Bearer à ajouter
-
-    return this.http.post(url,[this.id,this.typeObj],{headers:header}).subscribe(data => {
-      console.log(data);
-
-    }, error => {
-      console.log(error);
-    });
   }
 
 }

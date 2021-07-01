@@ -50,4 +50,14 @@ export class ObjectifService {
     return this.httpClient.patch(environment.API_URL + 'api/validate-objective',{id: objective_id}, httpHeaders);
   }
 
+  deleteObjective(objective_id: number, token: string) {
+
+    const httpHeaders = {
+      headers: new HttpHeaders()
+        .append('Authorization', `Bearer ${token}`)
+    };
+
+    return this.httpClient.patch(environment.API_URL + 'api/delete-objective',{id: objective_id}, httpHeaders);
+  }
+
 }
