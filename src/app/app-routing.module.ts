@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'addObjectif',
     loadChildren: () => import('./pages/add-objectif/add-objectif.module').then( m => m.AddObjectifPageModule)
+  },  {
+    path: 'update-objectif',
+    loadChildren: () => import('./pages/update-objectif/update-objectif.module').then( m => m.UpdateObjectifPageModule)
   }
+
 
 ];
 @NgModule({
