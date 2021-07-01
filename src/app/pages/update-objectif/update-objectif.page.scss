@@ -1,0 +1,59 @@
+.obj-col{
+  font-size: 13px;
+  text-align: center;
+  color: #ccc;
+
+
+}
+
+ion-title{
+  text-align: center;
+}
+ion-card ion-label{
+  font-size: 20px;
+
+}
+.button-add-objective{
+  --background: transparent;
+  display: block;
+  margin:20px;
+  border: 1px solid #ccc;
+}
+
+.obj-title{
+  font-size: 17px;
+  text-align: center;
+  color: white;
+}
+
+.button-modifier{
+  width: 20px !important;
+
+}
+ion-icon[name="ellipsis-horizontal-outline"]{
+  margin-top: 10px;
+}
+
+ion-button[value="1"]{
+  --background: transparent;
+  display: block;
+  margin:20px;
+  border: 1px solid #2ECC40;
+  color:#2ECC40;
+}
+
+ion-button[value="2"]{
+  --background: transparent;
+  display: block;
+  margin:20px;
+  border: 1px solid #AAAAAA;
+  color:#AAAAAA;
+}
+
+ion-button[value="0"]{
+  --background: transparent;
+  display: block;
+  margin:20px;
+  border: 1px solid #FF4136;
+  color:#FF4136;
+}

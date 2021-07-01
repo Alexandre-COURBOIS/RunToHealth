@@ -35,7 +35,7 @@
           <ion-col class="obj-col" *ngIf="objective.type=='Poids'">{{objective.valueObjectif}}g/j</ion-col>
           <ion-col class="obj-col">{{objective.begin_at}}</ion-col>
           <ion-col class="obj-col">{{objective.end_at}}</ion-col>
-          <ion-icon routerLink="" name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-icon routerLink="/update-objectif/{{objective.id}}" name="ellipsis-horizontal-outline"></ion-icon>
       </ion-row>
 
     </ion-card-content>
