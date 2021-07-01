@@ -27,6 +27,11 @@ export class RegisterPage implements OnInit {
     this.storage.create();
   }
 
+  ionViewDidLeave() {
+  this.registerForm.reset();
+  this.registerFormSecondPart.reset();
+  }
+
   initRegisterForms() {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],

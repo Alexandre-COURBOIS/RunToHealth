@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import {Validators} from "@angular/forms";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ObjectifService} from "../../services/objectif.service";
+import {Storage} from "@ionic/storage-angular";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-add-objectif',
@@ -16,10 +19,24 @@ export class AddObjectifPage implements OnInit {
   private type:any;
   private type_selected:any;
   private objectiveForm: FormGroup;
+  private token : string;
+  private userEmail: string;
 
-  constructor(public route: ActivatedRoute,public formBuilder: FormBuilder,public http:HttpClient) { }
+  constructor(public route: ActivatedRoute,public formBuilder: FormBuilder,private objectifService: ObjectifService, private storage: Storage,
+              private toastr: ToastService, private router: Router) { }
 
   ngOnInit() {
+
+    this.storage.create();
+
+    this.storage.get('_token').then(token => {
+      this.token = token;
+    });
+
+    this.storage.get('user').then(user => {
+
+      this.userEmail = user.email;
+    });
 
     this.type=['Cigarette','Alcool','Poids','Sport'];
     this.buildObjectiveForm();
@@ -52,18 +69,14 @@ export class AddObjectifPage implements OnInit {
       return;
     }
 
-    console.log(this.objectiveForm.value);
+    this.objectifService.sendObjectif(this.objectiveForm.value,this.userEmail, this.token).subscribe(value => {
 
-    let url="http://127.0.0.1:8000/data";
-    let header= new HttpHeaders({"Content-type":"application-json"}); //Bearer à ajouter
-
-
-    return this.http.post(url,JSON.stringify(this.objectiveForm.value),{headers:header}).subscribe(data => {
-      console.log(data);
-
+      this.toastr.successToast("Féliciations vous venez d'ajouter un nouvel objectif !");
+      this.router.navigate(['/tabs/objectifs'])
     }, error => {
-      console.log(error);
+      this.toastr.errorToast("Veuillez réessayer une petite erreur s'est produit !");
     });
+
   }
 
 }

@@ -1,6 +1,6 @@
 <ion-content>
 
-  <ion-button class="button-add-objective" routerLink="/addObjectif">
+  <ion-button class="button-add-objective" routerLink="/tabs/add-objectif">
     <ion-icon name="add" ></ion-icon>Créer votre objectif !
   </ion-button>
 
@@ -10,7 +10,7 @@
       <ion-label>Mes objectifs en cours</ion-label>
     </ion-item>
 
-    <ion-card-content *ngIf="obj">
+    <ion-card-content *ngIf="objectives">
       <ion-row>
         <ion-col class="obj-title">Type</ion-col>
         <ion-col class="obj-title">Objectif</ion-col>
@@ -18,15 +18,17 @@
         <ion-col class="obj-title">Fin</ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let objective of obj">
-        <ion-col class="obj-col">{{objective.type}}</ion-col>
-        <ion-col class="obj-col" *ngIf="objective.type=='Sport'">{{objective.valueObjectif}}</ion-col>
-        <ion-col class="obj-col" *ngIf="objective.type=='Cigarette'">{{objective.valueObjectif}}/j</ion-col>
-        <ion-col class="obj-col" *ngIf="objective.type=='Alcool'">0</ion-col>
-        <ion-col class="obj-col" *ngIf="objective.type=='Poids'">{{objective.valueObjectif}}g/j</ion-col>
-        <ion-col class="obj-col">{{objective.begin_at}}</ion-col>
-        <ion-col class="obj-col">{{objective.end_at}}</ion-col>
-        <ion-icon routerLink="/update-objectif/{{objective.id}}" name="ellipsis-horizontal-outline"></ion-icon>
+      <ion-row *ngFor="let objective of objectives">
+        <div *ngIf="objective.success === false">
+          <ion-col class="obj-col">{{objective.type}}</ion-col>
+          <ion-col class="obj-col" *ngIf="objective.type=='Sport'">{{objective.valueObjectif}}</ion-col>
+          <ion-col class="obj-col" *ngIf="objective.type=='Cigarette'">{{objective.valueObjectif}}/j</ion-col>
+          <ion-col class="obj-col" *ngIf="objective.type=='Alcool'">0</ion-col>
+          <ion-col class="obj-col" *ngIf="objective.type=='Poids'">{{objective.valueObjectif}}g/j</ion-col>
+          <ion-col class="obj-col">{{objective.begin_at}}</ion-col>
+          <ion-col class="obj-col">{{objective.end_at}}</ion-col>
+          <ion-icon routerLink="/tabs/update-objectif/{{objective.id}}" name="ellipsis-horizontal-outline"></ion-icon>
+        </div>
       </ion-row>
 
     </ion-card-content>
@@ -36,6 +38,17 @@
     <ion-text>Mes objectifs terminés</ion-text>
   </ion-item>
 
-</ion-content>
+  <ion-row *ngFor="let objective of objectives">
+    <div *ngIf="objective.success === true">
+      <ion-col class="obj-col">{{objective.type}}</ion-col>
+      <ion-col class="obj-col" *ngIf="objective.type=='Sport'">{{objective.valueObjectif}}</ion-col>
+      <ion-col class="obj-col" *ngIf="objective.type=='Cigarette'">{{objective.valueObjectif}}/j</ion-col>
+      <ion-col class="obj-col" *ngIf="objective.type=='Alcool'">0</ion-col>
+      <ion-col class="obj-col" *ngIf="objective.type=='Poids'">{{objective.valueObjectif}}g/j</ion-col>
+      <ion-col class="obj-col">{{objective.begin_at}}</ion-col>
+      <ion-col class="obj-col">{{objective.end_at}}</ion-col>
+      <ion-icon routerLink="/tabs/update-objectif/{{objective.id}}" name="ellipsis-horizontal-outline"></ion-icon>
+    </div>
+  </ion-row>
 
-Envoyer un message à @FATE
+</ion-content>

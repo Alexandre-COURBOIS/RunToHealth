@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Storage} from "@ionic/storage-angular";
+import {ObjectifService} from "../../services/objectif.service";
+import {ToastService} from "../../services/toast.service";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-update-objectif',
@@ -16,15 +20,31 @@ export class UpdateObjectifPage implements OnInit {
   private value:any;
   private id:number;
   private typeObj:String;
+  private token: string;
 
-  constructor(private activatedRoute: ActivatedRoute,public http:HttpClient,public formBuilder: FormBuilder) {
+  constructor(private activatedRoute: ActivatedRoute,public http:HttpClient,public formBuilder: FormBuilder, private storage: Storage,
+              private objectifService: ObjectifService, private toastService: ToastService, private router: Router, private loaderService: LoaderService) {
   }
 
   ngOnInit() {
 
-    this.id = this.activatedRoute.snapshot.params.id;
-    this.getObjectif();
+    this.storage.create();
+
     this.buildUpdateForm();
+
+    this.id = this.activatedRoute.snapshot.params.id;
+
+    this.storage.get('_token').then(token => {
+
+      this.objectifService.getObjectifById(this.id, token).subscribe(objective => {
+
+        this.currentObjective = objective;
+        this.token = token;
+      },error => {
+
+      });
+    });
+
   }
 
   buildUpdateForm(){
@@ -34,23 +54,6 @@ export class UpdateObjectifPage implements OnInit {
       noValid:['', []],
       deleteObjectif:['', []],
       typeObjectif:['', []],
-
-
-    });
-  }
-
-  getObjectif(){// faire à partir du storage !
-
-    let url="http://127.0.0.1:8000/search/objective";
-    let header= new HttpHeaders({"Content-type":"application-json"}); //Bearer à ajouter
-
-    return this.http.post(url,this.id,{headers:header}).subscribe(data => {
-      this.currentObjective=data;
-      console.log(this.currentObjective);
-      this.typeObj=this.currentObjective[0].type;
-
-    }, error => {
-      console.log(error);
     });
   }
 
@@ -59,19 +62,26 @@ export class UpdateObjectifPage implements OnInit {
   }
 
   updateObjectif() {
-    console.log(this.value);
+
+    this.loaderService.showLoader();
 
     if (this.value == 0) {
       console.log("Suppresion...");
       this.deleteObjective(this.id);
 
     } else if (this.value == 1) {
-      console.log("Validation...");
+      this.objectifService.setObjectifSuccess(this.id,this.token).subscribe(value => {
+        this.toastService.successToast(value);
+
+        setTimeout(() => {
+          this.loaderService.hideLoader();
+          this.router.navigate(['/tabs/objectifs']);
+        },1000);
+
+      });
 
     } else if (this.value == 2) {
       console.log("Modification...");
-
-
     }
 
   }

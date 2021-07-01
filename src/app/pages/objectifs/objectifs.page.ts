@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ObjectifService} from "../../services/objectif.service";
+import {Storage} from "@ionic/storage-angular";
+import {Router} from "@angular/router";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-objectifs',
@@ -8,30 +12,27 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class ObjectifsPage implements OnInit {
 
-  public obj:any;
+  private objectives: any;
 
-  constructor(public http:HttpClient) { }
+  constructor(private http:HttpClient, private objectifService: ObjectifService, private storage: Storage,private router: Router, private toastr: ToastService) { }
 
   ngOnInit() {
 
-    this.getCurrentObjectif();
+    this.storage.create();
 
-  }
+    this.storage.get('_token').then(token => {
 
+      this.objectifService.getCurrentObjectif(token).subscribe(objectivs => {
 
-  getCurrentObjectif(){
+        this.objectives = objectivs;
 
-    let url="http://127.0.0.1:8000/objective";
-    let header= new HttpHeaders({"Content-type":"application-json"}); //Bearer à ajouter
+      },error => {
 
+        console.log(error);
+      });
 
-    return this.http.post(url,[],{headers:header}).subscribe(data => {
-      this.obj=data;
-      console.log(this.obj);
-
-    }, error => {
-      console.log(error);
     });
   }
+
 
 }
