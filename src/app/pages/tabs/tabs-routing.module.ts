@@ -26,6 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'nutrition',
+        canActivate: [LoggedGuardService],
         loadChildren: () => import('../nutrition/nutrition.module').then( m => m.NutritionPageModule)
       },
       {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Storage} from "@ionic/storage-angular";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-profil',
@@ -15,7 +16,7 @@ export class ProfilPage implements OnInit {
   name: string;
   imc : number;
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage, private alertService: AlertService) { }
 
   ngOnInit() {
     this.storage.create();
@@ -32,6 +33,10 @@ export class ProfilPage implements OnInit {
       this.imc = Math.round((this.weight) / (this.height*this.height) * 10000);
 
     });
+  }
+
+  logout() {
+    this.alertService.alertDeconnexion();
   }
 
 }
