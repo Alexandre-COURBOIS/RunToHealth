@@ -26,14 +26,20 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'nutrition',
     loadChildren: () => import('./pages/nutrition/nutrition.module').then( m => m.NutritionPageModule)
   },
   {
-    path: 'modal',
-    loadChildren: () => import('./pages/modal/modal.module').then( m => m.ModalPageModule)
+    path: 'dejeuner-petitdejeuner',
+    loadChildren: () => import('./modals/dejeuner-modal/dejeuner-modal.module').then( m => m.DejeunerModalPageModule)
   },
+  {
+    path: 'petitdejeuner-modal',
+    loadChildren: () => import('./modals/petitdejeuner-modal/petitdejeuner-modal.module').then( m => m.PetitdejeunerModalPageModule)
+  },
+
 
 ];
 

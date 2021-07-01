@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from '../../../environments/environment';
+import { DejeunerModalPage } from "../../modals/dejeuner-modal/dejeuner-modal.page";
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-nutrition',
@@ -10,12 +12,11 @@ import {environment} from '../../../environments/environment';
 export class NutritionPage implements OnInit {
   test: any;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private modalController: ModalController) { }
 
   ngOnInit() {
     this.test = this.httpClient.post("https://trackapi.nutritionix.com/v2/natural/nutrients", {
       query: "eggs",
-      timezone: "FR"
     },
       {
         headers: {
@@ -26,7 +27,13 @@ export class NutritionPage implements OnInit {
         console.log(value)
     })
 
+  }
 
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: DejeunerModalPage
+    });
+    return await modal.present();
   }
 
 }

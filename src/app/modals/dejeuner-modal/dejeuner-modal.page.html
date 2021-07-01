@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>dejeunerModal</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    placeholder="Nom de l'aliment"
+    (search)="search($event.target.value)"
+    (ionChange)="autocomplete($event.target.value)"
+    [value]="itemSelected"></ion-searchbar>
+
+  <ion-list *ngIf="isItemAvailable">
+    <ion-item *ngFor="let item of items" (click)="selectItem(item)">{{item.food_name}}</ion-item>
+  </ion-list>
+  <ion-thumbnail *ngIf="itemSelectedObj">
+    <ion-img [src]="itemSelectedObj.photo.thumb"></ion-img>
+  </ion-thumbnail>
+</ion-content>

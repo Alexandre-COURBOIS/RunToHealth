@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModalPageRoutingModule } from './modal-routing.module';
+import { DejeunerModalPageRoutingModule } from './dejeuner-modal-routing.module';
 
-import { ModalPage } from './modal.page';
+import { DejeunerModalPage } from './dejeuner-modal.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalPageRoutingModule
+    DejeunerModalPageRoutingModule
   ],
-  declarations: [ModalPage]
+  declarations: [DejeunerModalPage]
 })
-export class ModalPageModule {}
+export class DejeunerModalPageModule {}
