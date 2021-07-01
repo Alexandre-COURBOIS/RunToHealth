@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dîner</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="nutritionService.dismiss('diner')">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    placeholder="Nom de l'aliment"
+    (search)="nutritionService.search($event.target.value)"
+    (ionChange)="nutritionService.autocomplete($event.target.value)"
+    [value]="nutritionService.itemSelected"></ion-searchbar>
+
+  <ion-list *ngIf="nutritionService.isItemAvailable">
+    <ion-item *ngFor="let item of nutritionService.items" (click)="nutritionService.selectItem(item)">{{item.food_name}}</ion-item>
+  </ion-list>
+  <ion-thumbnail *ngIf="nutritionService.itemSelectedObj">
+    <ion-img [src]="nutritionService.itemSelectedObj.photo.thumb"></ion-img>
+  </ion-thumbnail>
+</ion-content>
