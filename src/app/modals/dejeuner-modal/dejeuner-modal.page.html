@@ -15,9 +15,21 @@
     [value]="nutritionService.itemSelected"></ion-searchbar>
 
   <ion-list *ngIf="nutritionService.isItemAvailable">
-    <ion-item *ngFor="let item of nutritionService.items" (click)="nutritionService.selectItem(item)">{{item.food_name}}</ion-item>
+    <ion-item *ngFor="let item of nutritionService.items" (click)="nutritionService.selectItem(item)">
+      <ion-label>
+        <h3>{{item.food_name}}</h3>
+        <p>{{item.nf_calories}} kcal</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
-  <ion-thumbnail *ngIf="nutritionService.itemSelectedObj">
+
+  <ion-card *ngIf="nutritionService.itemSelectedObj">
     <ion-img [src]="nutritionService.itemSelectedObj.photo.thumb"></ion-img>
-  </ion-thumbnail>
+    <ion-card-header>
+      <ion-card-title>{{nutritionService.itemSelectedObj.food_name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{nutritionService.itemSelectedObj.nf_calories}} kcal</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
