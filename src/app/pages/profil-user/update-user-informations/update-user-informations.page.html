@@ -7,23 +7,23 @@
     </ion-row>
 
     <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-      <ion-row>
+      <ion-row class="ion-justify-content-center">
         <h2>Modifier vos informations</h2>
       </ion-row>
       <ion-row>
-        <ion-input value="{{name}}" name="name" formControlName="name"></ion-input>
+        <ion-input value="{{name}}" name="name" placeholder="Votre nom" formControlName="name"></ion-input>
       </ion-row>
       <div *ngIf="submitted && f.name.errors">
         <div class="error-danger" *ngIf="f.name.errors.required">Merci de renseigner votre nom.</div>
       </div>
       <ion-row>
-        <ion-input value="{{surname}}" name="surname" formControlName="surname"></ion-input>
+        <ion-input value="{{surname}}" name="surname" placeholder="Votre prénom" formControlName="surname"></ion-input>
       </ion-row>
       <div *ngIf="submitted && f.surname.errors">
         <div class="error-danger" *ngIf="f.surname.errors.required">Merci de renseigner votre prénom.</div>
       </div>
       <ion-row>
-        <ion-input value="{{pseudo}}" name="pseudo" formControlName="pseudo"></ion-input>
+        <ion-input value="{{pseudo}}" name="pseudo" formControlName="pseudo" placeholder="Votre pseudo"></ion-input>
       </ion-row>
       <div *ngIf="submitted && f.pseudo.errors">
         <div class="error-danger" *ngIf="f.pseudo.errors.required">Merci de renseigner votre pseudo.</div>
