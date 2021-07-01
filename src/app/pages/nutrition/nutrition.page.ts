@@ -16,6 +16,7 @@ export class NutritionPage implements OnInit {
   petitDejCal: any;
   dejCal: any;
   dinerCal: any;
+  calories: number;
 
   constructor(private httpClient: HttpClient, private modalController: ModalController, public nutritionService: NutritionService, private storage: Storage) { }
   ngOnInit() {
@@ -24,6 +25,7 @@ export class NutritionPage implements OnInit {
     this.updatePetitDejCal();
     this.updateDejCal();
     this.updateDinerCal();
+    this.updateCalories();
   }
 
   async presentDejeunerModal() {
@@ -34,6 +36,7 @@ export class NutritionPage implements OnInit {
     modal.onDidDismiss().then(value => {
       if(value) {
         this.updateDejCal();
+        this.updateCalories();
       }
     });
 
@@ -48,6 +51,7 @@ export class NutritionPage implements OnInit {
     modal.onDidDismiss().then(value => {
       if(value) {
         this.updatePetitDejCal();
+        this.updateCalories();
       }
     });
 
@@ -61,7 +65,8 @@ export class NutritionPage implements OnInit {
 
     modal.onDidDismiss().then(value => {
       if(value) {
-        this.updateDinerCal();
+        this.updateDinerCal()
+        this.updateCalories();
       }
     });
 
@@ -72,37 +77,38 @@ export class NutritionPage implements OnInit {
     // @ts-ignore
     this.storage.get('dejeuner').then(value => {
       if(value) {
-        console.log(value);
         this.dejCal = value;
       } else {
-        console.log("STORAGE VIDE")
         this.dejCal = "";
       }
-    })
+    });
   }
   updatePetitDejCal() {
     // @ts-ignore
     this.storage.get('petitdejeuner').then(value => {
       if(value) {
-        console.log(value);
         this.petitDejCal = value;
       } else {
-        console.log("STORAGE VIDE")
         this.petitDejCal = "";
       }
-    })
+    });
   }
   updateDinerCal() {
     // @ts-ignore
     this.storage.get('diner').then(value => {
       if(value) {
-        console.log(value);
         this.dinerCal = value;
       } else {
-        console.log("STORAGE VIDE")
         this.dinerCal = "";
       }
-    })
+    });
+  }
+  updateCalories() {
+    this.nutritionService.countCalories().then(value => {
+      if(value) {
+        this.calories = value;
+      }
+    });
   }
 
 }

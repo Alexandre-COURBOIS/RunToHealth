@@ -14,6 +14,7 @@ export class NutritionService {
   itemSelected: String = "";
   itemSelectedObj: any = null;
   ignoreNextChange = false;
+  calories: number;
 
   constructor(private httpClient: HttpClient, private modalController: ModalController, private storage: Storage) { }
 
@@ -59,11 +60,34 @@ export class NutritionService {
   }
 
   selectItem(selected: any) {
-    console.log(selected)
     this.isItemAvailable = false;
     this.itemSelected = selected.food_name;
     this.itemSelectedObj = selected;
     this.ignoreNextChange = true;
+  }
+
+  async countCalories() {
+    let petitdejCal: number = 0;
+    let dejCal: number = 0;
+    let dinerCal: number = 0;
+
+    await this.storage.get('petitdejeuner').then(value => {
+      if(value) {
+        petitdejCal = value.nf_calories;
+      }
+    });
+    await this.storage.get('dejeuner').then(value => {
+      if(value) {
+        dejCal = value.nf_calories;
+      }
+    });
+    await this.storage.get('diner').then(value => {
+      if(value) {
+        dinerCal = value.nf_calories;
+      }
+    });
+
+    return petitdejCal + dejCal + dinerCal;
   }
 
   dismiss(storageKey: String = '') {
