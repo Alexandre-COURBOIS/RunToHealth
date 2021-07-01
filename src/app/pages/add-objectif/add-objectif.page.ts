@@ -56,7 +56,7 @@ export class AddObjectifPage implements OnInit {
 
     console.log(this.objectiveForm.value);
 
-    let url="https://127.0.0.1:8000/data";
+    let url="http://127.0.0.1:8000/data";
     let header= new HttpHeaders({"Content-type":"application-json"}); //Bearer à ajouter
 
 
