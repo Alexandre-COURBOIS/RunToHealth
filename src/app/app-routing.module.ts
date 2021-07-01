@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'petitdejeuner-modal',
     loadChildren: () => import('./modals/petitdejeuner-modal/petitdejeuner-modal.module').then( m => m.PetitdejeunerModalPageModule)
+  },  {
+    path: 'diner-modal',
+    loadChildren: () => import('./modals/diner-modal/diner-modal.module').then( m => m.DinerModalPageModule)
   },
+
 
 
 ];
