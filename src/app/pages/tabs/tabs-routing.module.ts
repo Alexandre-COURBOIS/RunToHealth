@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import {AuthGuardService} from "../../services/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
+        canActivate: [AuthGuardService],
         loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
       },
       {
@@ -35,6 +37,10 @@ const routes: Routes = [
       {
         path: '404NotFound',
         loadChildren: () => import('../not-found404/not-found404.module').then( m => m.NotFound404PageModule)
+      },
+      {
+        path: 'profil-user',
+        loadChildren: () => import('../profil-user/profil-user.module').then( m => m.ProfilUserPageModule)
       },
     ]
   }

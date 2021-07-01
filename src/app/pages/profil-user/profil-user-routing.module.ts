@@ -7,7 +7,19 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilUserPage
+  },  {
+    path: 'update-user-contact',
+    loadChildren: () => import('../../Pages/profil-user/update-user-contact/update-user-contact.module').then( m => m.UpdateUserContactPageModule)
+  },
+  {
+    path: 'update-user-informations',
+    loadChildren: () => import('../../Pages/profil-user/update-user-informations/update-user-informations.module').then( m => m.UpdateUserInformationsPageModule)
+  },
+  {
+    path: 'update-user-password',
+    loadChildren: () => import('../../Pages/profil-user/update-user-password/update-user-password.module').then( m => m.UpdateUserPasswordPageModule)
   }
+
 ];
 
 @NgModule({
