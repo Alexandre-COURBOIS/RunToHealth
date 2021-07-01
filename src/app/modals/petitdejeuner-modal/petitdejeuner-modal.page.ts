@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NutritionService} from "../../services/nutrition.service";
 
 @Component({
   selector: 'app-petitdejeuner-modal',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetitdejeunerModalPage implements OnInit {
 
-  constructor() { }
+  constructor(public nutritionService: NutritionService) { }
 
   ngOnInit() {
   }
