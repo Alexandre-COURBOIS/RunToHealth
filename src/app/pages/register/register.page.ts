@@ -4,6 +4,7 @@ import {ToastService} from "../../services/toast.service";
 import {RegisterService} from "../../services/register.service";
 import {Router} from "@angular/router";
 import {Storage} from "@ionic/storage-angular";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterPage implements OnInit {
   private formPartOne = false;
 
 
-  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService, private router: Router, private storage: Storage) { }
+  constructor(private formBuilder: FormBuilder, private toastService: ToastService, private registerService: RegisterService, private router: Router, private storage: Storage,
+              private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.initRegisterForms();
@@ -74,6 +76,8 @@ export class RegisterPage implements OnInit {
 
     if (this.registerFormSecondPart.valid) {
 
+      this.loaderService.showLoader();
+
       let weight = this.registerFormSecondPart.controls.weight.value;
       let height = this.registerFormSecondPart.controls.height.value;
       let smoker = this.registerFormSecondPart.controls.smoker.value;
@@ -96,15 +100,20 @@ export class RegisterPage implements OnInit {
           this.userInformations[0].email,this.userInformations[0].city,this.userInformations[0].address,this.userInformations[0].postalCode,this.userInformations[0].phone,
           weight, height, smoker, alcohol, password).subscribe(value => {
 
-            if (value) {
+          if (value) {
             this.toastService.successToast('Votre compte a été créer avec succès. Vous pouvez vous connecter');
-            this.router.navigate(['/login']);
-            }
-
+            this.router.navigate(['tabs/login']);
+            this.loaderService.hideLoader();
+          } else {
+            this.loaderService.hideLoader();
           }
-        )
+
+        }, error => {
+          this.loaderService.hideLoader();
+        });
       } else {
         this.toastService.customErrortoast("Les mots de passe saisis doivent être identiques", 3000);
+        this.loaderService.hideLoader();
       }
     }
   }

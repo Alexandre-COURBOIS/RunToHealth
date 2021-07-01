@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-back-button mode="ios" [text]="retour" defaultHref="update-user"></ion-back-button>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <ion-row>
+        <h2>Modifier vos informations</h2>
+      </ion-row>
+      <ion-row>
+        <ion-input value="{{name}}" name="name" formControlName="name"></ion-input>
+      </ion-row>
+      <div *ngIf="submitted && f.name.errors">
+        <div class="error-danger" *ngIf="f.name.errors.required">Merci de renseigner votre nom.</div>
+      </div>
+      <ion-row>
+        <ion-input value="{{surname}}" name="surname" formControlName="surname"></ion-input>
+      </ion-row>
+      <div *ngIf="submitted && f.surname.errors">
+        <div class="error-danger" *ngIf="f.surname.errors.required">Merci de renseigner votre prénom.</div>
+      </div>
+      <ion-row>
+        <ion-input value="{{pseudo}}" name="pseudo" formControlName="pseudo"></ion-input>
+      </ion-row>
+      <div *ngIf="submitted && f.pseudo.errors">
+        <div class="error-danger" *ngIf="f.pseudo.errors.required">Merci de renseigner votre pseudo.</div>
+        <div class="error-danger" *ngIf="f.pseudo.errors.minlength">Merci de renseigner un pseudo avec au moins
+          3 caractères.
+        </div>
+      </div>
+      <ion-row class="ion-justify-content-center">
+        <ion-button type="submit" [disabled]="updateForm.invalid">Valider</ion-button>
+      </ion-row>
+    </form>
+    <p class="ion-color-danger">{{errorMessage}}</p>
+  </ion-grid>
+</ion-content>
