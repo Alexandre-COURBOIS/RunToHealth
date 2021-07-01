@@ -38,10 +38,46 @@ const routes: Routes = [
   {
     path: 'petitdejeuner-modal',
     loadChildren: () => import('./modals/petitdejeuner-modal/petitdejeuner-modal.module').then( m => m.PetitdejeunerModalPageModule)
-  },  {
+  },
+  {
     path: 'diner-modal',
     loadChildren: () => import('./modals/diner-modal/diner-modal.module').then( m => m.DinerModalPageModule)
   },
+  {
+    path: 'active-account/:token',
+    loadChildren: () => import('./Pages/activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./Pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'reset-password/:token',
+    loadChildren: () => import('./Pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: '404NotFound',
+    loadChildren: () => import('./Pages/not-found404/not-found404.module').then( m => m.NotFound404PageModule)
+  },
+  {
+    path: 'add-objectif',
+    loadChildren: () => import('./Pages/add-objectif/add-objectif.module').then( m => m.AddObjectifPageModule)
+  },
+  {
+    path: 'objectifs',
+    loadChildren: () => import('./Pages/objectifs/objectifs.module').then( m => m.ObjectifsPageModule)
+  },
+  {
+    path: 'update-objectif/:id',
+    loadChildren: () => import('./Pages/update-objectif/update-objectif.module').then( m => m.UpdateObjectifPageModule)
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./Pages/profil/profil.module').then( m => m.ProfilPageModule)
+  },
+
+
+];
 
 
 

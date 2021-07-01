@@ -1,15 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Nous rejoindre <ion-icon name="planet-outline"></ion-icon></ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content *ngIf="formPartOne == false">
 
   <form [formGroup]="registerForm">
 
-    <ion-row>
-      <p class="sectionName">Qui êtes vous ?</p>
+    <ion-row class="ion-margin-top ion-justify-content-center">
+      <p>Qui êtes vous ?</p>
     </ion-row>
 
     <ion-row>
@@ -49,8 +43,8 @@
       </ion-row>
     </ion-row>
 
-    <ion-row>
-      <p class="sectionName">D'où venez vous ?</p>
+    <ion-row class="ion-margin-top ion-justify-content-center">
+      <p>D'où venez vous ?</p>
     </ion-row>
 
     <ion-row>
@@ -81,8 +75,8 @@
     </ion-row>
   </form>
 
-  <ion-row class="ion-justify-content-center">
-    <ion-button  (click)="submitFirstPart()" color="success">
+  <ion-row class="ion-justify-content-center ion-margin-top">
+    <ion-button  (click)="submitFirstPart()">
       Dites-nous en plus !
       <ion-icon name="arrow-forward-outline"></ion-icon>
     </ion-button>

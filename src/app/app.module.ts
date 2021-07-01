@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./Helpers/jwt.interceptor";
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {JwtInterceptor} from "./Helpers/jwt.interceptor";
       useClass: IonicRouteStrategy
     },
     JwtInterceptor,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

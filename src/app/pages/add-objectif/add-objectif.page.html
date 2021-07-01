@@ -1,0 +1,46 @@
+<ion-content>
+
+<form [formGroup]="objectiveForm" (ngSubmit)="addObjectif()">
+  <ion-item *ngIf="type" >
+    <ion-label class="form-text">Objectifs</ion-label>
+    <ion-select (ionChange)="getObjectivesType($event);" formControlName="objectif">
+      <ion-select-option *ngFor="let objectives of type"  value="{{ objectives }}">{{ objectives }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="type_selected =='Cigarette'">
+    <ion-label class="form-text" position="floating">Nombre de cigarette par jour:</ion-label>
+    <ion-range formControlName="numberCigarette" min="0" max="20" pin="true" snaps="true" color="secondary">
+      <ion-label slot="start">0</ion-label>
+      <ion-label slot="end">20</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-item *ngIf="type_selected =='Alcool'">
+    <ion-text class="form-text" position="floating">Vous ne devez pas consommer d'alcool<br> pendant la période que vous indiquerez ci-dessous</ion-text>
+    <ion-input formControlName="alcool" type="hidden" value="false"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="type_selected =='Poids'">
+    <ion-label class="form-text" >Objectif en gramme par jour:</ion-label>
+    <ion-input formControlName="numberPoids" type="number" name="poids" placeholder="Poids"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="type_selected =='Sport'">
+    <ion-label class="form-text" position="floating">Nombre de minutes de sport par jour:</ion-label>
+    <ion-datetime formControlName="timeSport" displayFormat="mm:ss" placeholder="temps"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="form-text">Début de l'objectif:</ion-label>
+    <ion-datetime formControlName="begin" displayFormat="DD MM YY" placeholder="Choisissez une Date"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label class="form-text">fin de l'objectif</ion-label>
+    <ion-datetime formControlName="end" displayFormat="DD MM YY" placeholder="Choisissez une Date"></ion-datetime>
+  </ion-item>
+
+  <ion-button type="submit">Créer l'objectif</ion-button>
+</form>
+
+
+</ion-content>

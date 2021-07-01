@@ -9,6 +9,9 @@ import {UserService} from "../../services/user.service";
 import {HttpHeaders} from "@angular/common/http";
 import {JwtInterceptor} from "../../Helpers/jwt.interceptor";
 import {Router} from "@angular/router";
+import {ActivationService} from "../../services/activation.service";
+import {ModalController} from "@ionic/angular";
+import {LoaderService} from "../../services/loader.service";
 
 @Component({
   selector: 'app-login',
@@ -20,9 +23,10 @@ export class LoginPage implements OnInit {
   submitted = false;
   loginForm: FormGroup;
   token: string;
+  modalDataResponse: any;
 
   constructor(private formBuilder: FormBuilder, private storage: Storage, private toastr : ToastService, private authService: AuthService,
-              private userService: UserService, private router: Router) { }
+              private userService: UserService, private router: Router, private activationService: ActivationService, private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -40,6 +44,8 @@ export class LoginPage implements OnInit {
     this.submitted = true;
 
     if (this.loginForm.valid) {
+
+      this.loaderService.showLoader();
 
       const typedEmail = this.loginForm.get('email')?.value;
       const typedPassword = this.loginForm.get('password')?.value;
@@ -70,23 +76,34 @@ export class LoginPage implements OnInit {
               if (value.active === true) {
 
                 this.router.navigate(['tabs/home']);
+
+                this.storage.set('is_logged', true);
                 // @ts-ignore
                 this.toastr.successToast("Bienvenue " + value.surname)
 
+                this.loaderService.hideLoader();
+
               } else {
-                this.toastr.customErrortoast("Veuillez valider votre inscription en cliquant sur le lien qui vous a été envoyé par mail lors de votre inscription." ,5000);
+                this.activationService.activeAccount(decodedJWT['username'], JWTToken).subscribe(value => {
+                  this.toastr.customSuccessToast(value,5000);
+                  this.loaderService.hideLoader();
+                });
+
               }
+            }, error => {
+              this.loaderService.hideLoader();
             });
           }
         });
+      } else {
+        this.loaderService.hideLoader();
       }
+    } else {
+      this.loaderService.hideLoader();
     }
-
-
   }
 
   get f() {
     return this.loginForm.controls;
   }
-
 }
