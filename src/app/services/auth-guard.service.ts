@@ -24,7 +24,7 @@ export class AuthGuardService {
               this.storage.get('_token').then(token => {
                 // @ts-ignore
                 if (jwtDecode(token).username === user.email) {
-                  this.router.navigate(['tabs/profil-user']);
+                  this.router.navigate(['tabs/profil']);
                 }
               });
             });

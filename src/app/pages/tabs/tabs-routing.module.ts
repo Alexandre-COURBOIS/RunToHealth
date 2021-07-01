@@ -42,6 +42,22 @@ const routes: Routes = [
         path: 'profil-user',
         loadChildren: () => import('../profil-user/profil-user.module').then( m => m.ProfilUserPageModule)
       },
+      {
+        path: 'add-objectif',
+        loadChildren: () => import('../add-objectif/add-objectif.module').then( m => m.AddObjectifPageModule)
+      },
+      {
+        path: 'objectifs',
+        loadChildren: () => import('../objectifs/objectifs.module').then( m => m.ObjectifsPageModule)
+      },
+      {
+        path: 'update-objectif/:id',
+        loadChildren: () => import('../update-objectif/update-objectif.module').then( m => m.UpdateObjectifPageModule)
+      },
+      {
+        path: 'profil',
+        loadChildren: () => import('../profil/profil.module').then( m => m.ProfilPageModule)
+      },
     ]
   }
 ];
