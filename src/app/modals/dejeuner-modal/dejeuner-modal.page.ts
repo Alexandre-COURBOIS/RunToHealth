@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {Storage} from "@ionic/storage-angular";
 
 @Component({
   selector: 'app-dejeuner-modal',
@@ -15,10 +16,11 @@ export class DejeunerModalPage implements OnInit {
   itemSelectedObj: any;
   ignoreNextChange = false;
 
-  constructor(private modalController: ModalController, private httpClient: HttpClient) {
+  constructor(private modalController: ModalController, private httpClient: HttpClient, private storage: Storage) {
   }
 
   ngOnInit() {
+    this.storage.create();
   }
 
   search(aliment: String) {
@@ -36,8 +38,7 @@ export class DejeunerModalPage implements OnInit {
         }
       }).subscribe(value => {
       console.log(value)
-    })
-
+    });
   }
 
   autocomplete(food: String) {
@@ -74,6 +75,10 @@ export class DejeunerModalPage implements OnInit {
   dismiss() {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
+    if (this.itemSelectedObj) {
+      this.storage.set('dejeuner', this.itemSelectedObj)
+    }
+
     this.modalController.dismiss({
       'dismissed': true
     });
