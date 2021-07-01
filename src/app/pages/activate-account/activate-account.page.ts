@@ -25,6 +25,8 @@ export class ActivateAccountPage implements OnInit {
         this.activateService.setAccountActive(token).subscribe(value => {
           this.toastr.successToast(value);
           this.router.navigate(['tabs/login']);
+        }, error => {
+          console.log(error);
         });
       } else {
         this.router.navigate(['tabs/login']);

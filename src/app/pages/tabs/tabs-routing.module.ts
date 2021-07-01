@@ -28,8 +28,8 @@ const routes: Routes = [
         path: 'nutrition',
         loadChildren: () => import('../nutrition/nutrition.module').then( m => m.NutritionPageModule)
       },
+      {
         path: 'active-account/:token',
-        canActivate: [LoggedGuardService],
         loadChildren: () => import('../activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
       },
       {
