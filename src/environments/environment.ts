@@ -5,6 +5,9 @@
 export const environment = {
   production: false,
   API_URL: 'http://127.0.0.1:8000/',
+  NUTRITIONIX_APP_ID: 'd2ac9254',
+  NUTRITIONIX_KEYS_ID: '91173efb89c962d268a81c8937a13dc9',
+
 };
 
 /*
