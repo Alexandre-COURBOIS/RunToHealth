@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Petit déjeuner</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="nutritionService.dismiss('petitdejeuner')">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    placeholder="Nom de l'aliment"
+    (search)="nutritionService.search($event.target.value)"
+    (ionChange)="nutritionService.autocomplete($event.target.value)"
+    [value]="nutritionService.itemSelected"></ion-searchbar>
+
+  <ion-list *ngIf="nutritionService.isItemAvailable">
+    <ion-item *ngFor="let item of nutritionService.items" (click)="nutritionService.selectItem(item)">
+      <ion-label>
+        <h3>{{item.food_name}}</h3>
+        <p>{{item.nf_calories}} kcal</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-card *ngIf="nutritionService.itemSelectedObj">
+    <ion-img [src]="nutritionService.itemSelectedObj.photo.thumb"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{nutritionService.itemSelectedObj.food_name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{nutritionService.itemSelectedObj.nf_calories}} kcal</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

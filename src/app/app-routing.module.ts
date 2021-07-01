@@ -28,6 +28,22 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
+    path: 'nutrition',
+    loadChildren: () => import('./pages/nutrition/nutrition.module').then( m => m.NutritionPageModule)
+  },
+  {
+    path: 'dejeuner-petitdejeuner',
+    loadChildren: () => import('./modals/dejeuner-modal/dejeuner-modal.module').then( m => m.DejeunerModalPageModule)
+  },
+  {
+    path: 'petitdejeuner-modal',
+    loadChildren: () => import('./modals/petitdejeuner-modal/petitdejeuner-modal.module').then( m => m.PetitdejeunerModalPageModule)
+  },
+  {
+    path: 'diner-modal',
+    loadChildren: () => import('./modals/diner-modal/diner-modal.module').then( m => m.DinerModalPageModule)
+  },
+  {
     path: 'active-account/:token',
     loadChildren: () => import('./Pages/activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
   },
@@ -59,6 +75,10 @@ const routes: Routes = [
     path: 'profil',
     loadChildren: () => import('./Pages/profil/profil.module').then( m => m.ProfilPageModule)
   },
+
+
+];
+
 
 
 ];

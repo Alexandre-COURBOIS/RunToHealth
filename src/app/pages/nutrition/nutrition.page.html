@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Nourriture</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Aujourd'hui</ion-card-subtitle>
+      <ion-card-title>{{calories}} kcal</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="sunny-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h2>Petit-déjeuner</h2>
+            <h3 *ngIf="petitDejCal else other">{{petitDejCal.nf_calories}} kcal</h3>
+          </ion-label>
+          <ion-button slot="end" (click)="presentPetitDejeunerModal()">+</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="restaurant-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h2>Déjeuner</h2>
+            <h3 *ngIf="dejCal; else other">{{dejCal.nf_calories}} kcal</h3>
+          </ion-label>
+          <ion-button slot="end" (click)="presentDejeunerModal()">+</ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="moon-outline" slot="start"></ion-icon>
+          <ion-label>
+            <h2>Diner</h2>
+            <h3 *ngIf="dinerCal; else other">{{dinerCal.nf_calories}} kcal</h3>
+          </ion-label>
+          <ion-button slot="end" (click)="presentDinerModal()">+</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-template #other><h3>--</h3></ng-template>
+</ion-content>
