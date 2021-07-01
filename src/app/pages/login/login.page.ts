@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
               // @ts-ignore
               if (value.active === true) {
 
-                this.router.navigate(['tabs/home']);
+                this.router.navigate(['tabs/profil']);
 
                 this.storage.set('is_logged', true);
                 // @ts-ignore
