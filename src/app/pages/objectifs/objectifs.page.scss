@@ -2,8 +2,6 @@
   font-size: 13px;
   text-align: center;
   color: #ccc;
-
-
 }
 
 ion-title{
@@ -32,4 +30,16 @@ ion-card ion-label{
 }
 ion-icon[name="ellipsis-horizontal-outline"]{
   margin-top: 10px;
+}
+
+ion-item{
+  --background:transparent !important ;
+  color: white;
+}
+.flex{
+  display: contents;
+}
+.returnButton{
+  height: 30px;
+  width: 30px;
 }
