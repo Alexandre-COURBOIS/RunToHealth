@@ -70,6 +70,16 @@ const routes: Routes = [
         canActivate: [LoggedGuardService],
         loadChildren: () => import('../profil/profil.module').then( m => m.ProfilPageModule)
       },
+      {
+        path: 'stats',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../stats/stats.module').then( m => m.StatsPageModule)
+      },
+      {
+        path: 'charts',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../charts/charts.module').then( m => m.ChartsPageModule)
+      },
     ]
   }
 ];
