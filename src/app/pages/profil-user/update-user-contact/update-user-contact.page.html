@@ -1,0 +1,43 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-back-button mode="ios" [text]="retour" defaultHref="update-user"></ion-back-button>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="updateFormInfoContact" (ngSubmit)="onSubmit()">
+      <ion-row class="ion-justify-content-center">
+        <h2>Modifier vos coordonnées</h2>
+      </ion-row>
+      <ion-row>
+        <ion-input value="{{city}}" name="city" formControlName="city"></ion-input>
+      </ion-row>
+      <div *ngIf="submitted && f.city.errors">
+        <div class="error-danger" *ngIf="f.city.errors.required">Merci de renseigner votre ville.</div>
+        <div class="error-danger" *ngIf="f.city.errors.minlength">Merci de renseigner une ville existante.</div>
+      </div>
+      <ion-row *ngIf="!postalCode" class="ion-margin-top ion-justify-content-center">
+        <ion-label class="label">Code postal :</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-input value="{{postalCode}}" name="postalCode" formControlName="postalCode"></ion-input>
+      </ion-row>
+      <div *ngIf="submitted && f.postalCode.errors">
+        <div class="error-danger" *ngIf="f.postalCode.errors.minlength">Merci de renseigner un code postal
+          correct.
+        </div>
+      </div>
+      <ion-row *ngIf="!address" class="ion-margin-top ion-justify-content-center">
+        <ion-label class="label">Adresse :</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-input value="{{address}}" name="address" formControlName="address"></ion-input>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button type="submit" [disabled]="updateFormInfoContact.invalid">Valider</ion-button>
+      </ion-row>
+    </form>
+    <p class="ion-color-danger">{{errorMessage}}</p>
+  </ion-grid>
+</ion-content>

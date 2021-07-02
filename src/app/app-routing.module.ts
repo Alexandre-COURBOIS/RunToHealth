@@ -1,46 +1,91 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { TabsPage } from './tabs.page';
+import {AuthGuardService} from "../../services/auth-guard.service";
+import {LoggedGuardService} from "../../services/logged-guard.service";
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'tabs/register',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./Pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'profil-user',
-    loadChildren: () => import('./Pages/profil-user/profil-user.module').then( m => m.ProfilUserPageModule)
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
-    path: 'stats',
-    loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
-  },
-  {
-    path: 'charts',
-    loadChildren: () => import('./pages/charts/charts.module').then( m => m.ChartsPageModule)
-  },
-
+    component: TabsPage,
+    children: [
+      {
+        path: 'home',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'register',
+        canActivate: [AuthGuardService],
+        loadChildren: () => import('../register/register.module').then( m => m.RegisterPageModule)
+      },
+      {
+        path: 'login',
+        canActivate: [AuthGuardService],
+        loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
+      },
+      {
+        path: 'nutrition',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../nutrition/nutrition.module').then( m => m.NutritionPageModule)
+      },
+      {
+        path: 'active-account/:token',
+        loadChildren: () => import('../activate-account/activate-account.module').then( m => m.ActivateAccountPageModule)
+      },
+      {
+        path: 'forgot-password',
+        loadChildren: () => import('../forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+      },
+      {
+        path: 'reset-password/:token',
+        loadChildren: () => import('../reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+      },
+      {
+        path: '404NotFound',
+        loadChildren: () => import('../not-found404/not-found404.module').then( m => m.NotFound404PageModule)
+      },
+      {
+        path: 'profil-user',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../profil-user/profil-user.module').then( m => m.ProfilUserPageModule)
+      },
+      {
+        path: 'add-objectif',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../add-objectif/add-objectif.module').then( m => m.AddObjectifPageModule)
+      },
+      {
+        path: 'objectifs',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../objectifs/objectifs.module').then( m => m.ObjectifsPageModule)
+      },
+      {
+        path: 'update-objectif/:id',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../update-objectif/update-objectif.module').then( m => m.UpdateObjectifPageModule)
+      },
+      {
+        path: 'profil',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('../profil/profil.module').then( m => m.ProfilPageModule)
+      },
+      {
+        path: 'stats',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule)
+      },
+      {
+        path: 'charts',
+        canActivate: [LoggedGuardService],
+        loadChildren: () => import('./pages/charts/charts.module').then( m => m.ChartsPageModule)
+      },
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class TabsPageRoutingModule {}

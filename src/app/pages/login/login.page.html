@@ -1,15 +1,6 @@
-<!--<ion-header>-->
-<!--  <ion-toolbar>-->
-<!--    <ion-title>Login</ion-title>-->
-<!--  </ion-toolbar>-->
-<!--</ion-header>-->
-
 <ion-content>
-  <div class="logo">
-    <ion-icon name="person-circle-outline"></ion-icon>
-  </div>
   <div class="padding">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email"></ion-input>
@@ -21,10 +12,21 @@
       </ion-item>
 
       <ion-item lines="none">
-        <ion-button fill="clear" slot="end">Mot de passe oublié ?</ion-button>
+        <ion-button routerLink="/tabs/forgot-password" fill="clear" slot="end">Mot de passe oublié ?</ion-button>
       </ion-item>
 
       <ion-button type="submit" expand="full" fill="outline" shape="round">Se connecter</ion-button>
     </form>
+
+    <div class="container-error">
+      <div class="error" *ngIf="submitted && f.email.errors && f.email.errors.required">Merci de renseigner
+        votre
+        email.
+      </div>
+      <div class="error" *ngIf="loginForm.get('email')?.value && f.email.errors && f.email.errors.pattern">
+        Merci
+        de renseigner un email valide.
+      </div>
+    </div>
   </div>
 </ion-content>
